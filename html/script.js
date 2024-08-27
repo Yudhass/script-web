@@ -1,0 +1,1 @@
+console.log("ini console di dalam file")
