@@ -1,5 +1,3 @@
-console.log("ini console di dalam file")
-
 async function hashString(message) {
     const encoder = new TextEncoder();
     const data = encoder.encode(message);
@@ -9,5 +7,21 @@ async function hashString(message) {
     return hashHex;
 }
 
+async function verifyHash(input, existingHash) {
+    const inputHash = await hashString(input);
+    return inputHash === existingHash;
+}
+
 // Contoh penggunaan:
-hashString("Your message here").then(hash => console.log(hash));
+const originalString = "Lapak Yudhas";
+hashString(originalString).then(hash => console.log(hash));
+
+const existingHash = "cce7b1465978e1519c968e580760272a280d114edd8091871a866d0032d28a04"; // Ganti dengan hash yang ingin Anda verifikasi
+
+verifyHash(originalString, existingHash).then(isMatch => {
+    if (isMatch) {
+        console.log("Hash cocok! Input terverifikasi.");
+    } else {
+        console.log("Hash tidak cocok! Input tidak valid.");
+    }
+});
